@@ -3,3 +3,4 @@
 ./log/*
 log/*
 ./conf/app1.yml
+./conf/app.yml
