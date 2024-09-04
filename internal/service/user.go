@@ -155,12 +155,13 @@ func UpdateUserNickName(ctx context.Context, req *UpdateNickNameRequest) error {
 }
 
 func getUserInfo(userName string) (*model.User, error) {
+	//这个有点不明白，我看着像是从redis中取出来用户信息
 	user, err := cache.GetUserInfoFromCache(userName)
 	if err == nil && user.Name == userName {
 		log.Infof("cache_user ======= %v", user)
 		return user, nil
 	}
-
+	//从mysql中取出来用户信息
 	user, err = dao.GetUserByName(userName)
 	if err != nil {
 		return user, err
@@ -170,6 +171,7 @@ func getUserInfo(userName string) (*model.User, error) {
 		return nil, fmt.Errorf("用户尚未注册")
 	}
 	log.Infof("user === %+v", user)
+	//将信息写入redis,并设置存活时间
 	err = cache.SetUserCacheInfo(user)
 	if err != nil {
 		log.Error("cache userinfo failed for user:", user.Name, " with err:", err.Error())

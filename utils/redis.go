@@ -28,6 +28,7 @@ func initRedis() {
 	if redisConn == nil {
 		panic("failed to call redis.NewClient")
 	}
+	//redis的操作的目的有点不懂
 	res, err := redisConn.Set(context.Background(), "abc", 100, 60).Result()
 	log.Infof("res=======%v,err======%v", res, err)
 	_, err = redisConn.Ping(context.Background()).Result()

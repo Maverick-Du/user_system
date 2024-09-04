@@ -10,6 +10,7 @@ import (
 	"user_system/utils"
 )
 
+// 将redis中的用户信息拿出来
 func GetUserInfoFromCache(username string) (*model.User, error) {
 	redisKey := constant.UserInfoPrefix + username
 	val, err := utils.GetRedisCli().Get(context.Background(), redisKey).Result()

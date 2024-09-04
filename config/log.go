@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-//tabFormatter tab数据格式化
+// tabFormatter tab数据格式化
 type logFormatter struct {
 	log.TextFormatter
 }

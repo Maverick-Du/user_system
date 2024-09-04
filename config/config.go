@@ -15,7 +15,7 @@ var (
 	once   sync.Once
 )
 
-//LogConf 日志配置
+// LogConf 日志配置
 type LogConf struct {
 	LogPattern string `yaml:"log_pattern" mapstructure:"log_pattern"` // 日志输出标准，终端输出/文件输出
 	LogPath    string `yaml:"log_path" mapstructure:"log_path"`       // 日志路径
@@ -76,6 +76,7 @@ func GetGlobalConf() *GlobalConfig {
 func readConf() {
 	viper.SetConfigName("app")
 	viper.SetConfigType("yml")
+	//为了提供配置文件的灵活性和发现性
 	viper.AddConfigPath(".")
 	viper.AddConfigPath("./conf")
 	viper.AddConfigPath("../conf")
@@ -87,7 +88,7 @@ func readConf() {
 	if err != nil {
 		panic("config file unmarshal err:" + err.Error())
 	}
-	log.Infof("config === %+v", config)
+	log.Infof("config === %+v \n", config)
 }
 
 // InitConfig 初始化日志

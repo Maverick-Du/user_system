@@ -50,7 +50,7 @@ func Login(c *gin.Context) {
 		rsp.ResponseWithError(c, CodeBodyBindErr, err.Error())
 		return
 	}
-
+	//这步是干什么？
 	uuid := utils.Md5String(req.UserName + time.Now().GoString())
 	ctx := context.WithValue(context.Background(), "uuid", uuid)
 	log.Infof("loggin start,user:%s, password:%s", req.UserName, req.PassWord)
@@ -82,6 +82,7 @@ func Logout(c *gin.Context) {
 		rsp.ResponseWithError(c, CodeLogoutErr, err.Error())
 		return
 	}
+	//删除cookie
 	c.SetCookie(constant.SessionKey, session, -1, "/", "", false, true)
 	rsp.ResponseSuccess(c)
 }
